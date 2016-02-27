@@ -61,6 +61,117 @@ public class RorPapTestOnChrome {
 		createDriver();
 		testLogInWithCreatedAccount();
 		destroyDriver();
+		createDriver();
+		testLogInWithNotCreatedAccount();
+		destroyDriver();
+		createDriver();
+		testLogInAndRememberMe();
+		destroyDriver();
+		createDriver();
+		testLogInForgotPassword();
+		destroyDriver();
+		createDriver();
+		testLogInUsingNotCreatedAccount();
+		destroyDriver();
+		createDriver();
+		testLogInUsingCreatedAccountButWrongPassword();
+		destroyDriver();
+	}
+	
+	/**
+	 * Test for Log in module.
+	 * 		Test for logging in using created account but entering wrong password.
+	 * @throws InterruptedException 
+	 */
+	private void testLogInUsingCreatedAccountButWrongPassword() throws InterruptedException{
+		testSignUpWithCorrectInformation();
+		
+		driver.findElement(By.linkText("Log In")).click();				
+		driver.findElement(By.id("emailAddressLogIn")).sendKeys("TesterName".concat(counter+"").concat("@tester.com"));
+		driver.findElement(By.id("password")).sendKeys("this is a wrong password");
+		driver.findElement(By.id("logInBtn")).click();
+		
+		System.out.println("I'm done with \'Test Log In with created account but wrong password.\'");
+		
+		Thread.sleep(10000);
+	}
+	
+	/**
+	 * Test for Log in module.
+	 * 		Test for logging in using unknown account which should redirect to sign up page.
+	 * @throws InterruptedException 
+	 */
+	private void testLogInUsingNotCreatedAccount() throws InterruptedException{
+		driver.findElement(By.linkText("Log In")).click();
+		driver.findElement(By.id("emailAddressLogIn")).sendKeys("TesterName".concat("TesterEiei").concat("@tester.com"));
+		driver.findElement(By.id("password")).sendKeys("123456");
+		driver.findElement(By.id("logInBtn")).click();
+		
+		Thread.sleep(10000);
+		
+		System.out.println("I'm done with \'Test Log In using unknown account.\'");
+	}
+	
+	/**
+	 * Test for Log in module.
+	 * 		Test for user forgot password.
+	 * @throws InterruptedException 
+	 */
+	private void testLogInForgotPassword() throws InterruptedException{
+		driver.findElement(By.linkText("Log In")).click();
+		driver.findElement(By.id("emailAddressLogIn")).sendKeys("TesterName".concat(counter+"").concat("@tester.com"));
+		driver.findElement(By.id("forgetPassword")).click();
+		
+		Thread.sleep(10000);
+		
+		System.out.println("I'm done with \'Test Log In and user forgot password.\'");
+	}
+	
+	/**
+	 * Test for Log in module.
+	 * 		Test for logging in with created account and select remember me.
+	 * @throws InterruptedException 
+	 */
+	private void testLogInAndRememberMe() throws InterruptedException{
+		testSignUpWithCorrectInformation();
+		
+		driver.findElement(By.linkText("Log In")).click();				
+		driver.findElement(By.id("emailAddressLogIn")).sendKeys("TesterName".concat(counter+"").concat("@tester.com"));
+		driver.findElement(By.id("password")).sendKeys("123456");		
+		driver.findElement(By.id("rememberMeLabel")).click();
+		driver.findElement(By.id("logInBtn")).click();
+		
+		Thread.sleep(3000);
+		
+		driver.findElement(By.linkText("Profile")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.linkText("Log Out")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("confirmLogOut")).click();
+		
+		driver.findElement(By.linkText("Log In")).click();
+		
+		System.out.println("I'm done with \'Test Log In with created account and remember me.\'");
+		
+		Thread.sleep(10000);
+	}
+	
+	/**
+	 * Test for Log in module.
+	 * 		Test for logging in with not created account.
+	 * @throws InterruptedException 
+	 */
+	private void testLogInWithNotCreatedAccount() throws InterruptedException{
+		driver.findElement(By.linkText("Log In")).click();
+		
+		driver.findElement(By.id("emailAddressLogIn")).sendKeys("unknownaccount1@tester.com");
+		driver.findElement(By.id("password")).sendKeys("123456");
+		
+		driver.findElement(By.id("logInBtn")).click();
+		
+		System.out.println("I'm done with \'Test Log In with not created account.\'");
+		
+		Thread.sleep(3000);		
 	}
 	
 	/**
