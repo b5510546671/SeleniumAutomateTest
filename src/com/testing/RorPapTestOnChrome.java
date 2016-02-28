@@ -40,42 +40,57 @@ public class RorPapTestOnChrome {
 	
 
 	private void init() throws InterruptedException {
-		createDriver();
-		testSignUpForPasswordMisMatching();
-		destroyDriver();
-		createDriver();
-		testSignUpWithIncorrectDateOfBirth();
-		destroyDriver();
-		createDriver();
-		testSignUpWithFutureDateOfBirth();
-		destroyDriver();
-		createDriver();
-		testSignUpWithOutAcceptingPolicy();
-		destroyDriver();
-		createDriver();
-		testSignUpWithInvalidEmailAddress();
-		destroyDriver();
-		createDriver();
-		testSignUpWithCorrectInformation();
-		destroyDriver();
-		createDriver();
+		/*createDriver(); testSignUpForPasswordMisMatching(); destroyDriver();
+		createDriver(); testSignUpWithIncorrectDateOfBirth(); destroyDriver();
+		createDriver(); testSignUpWithFutureDateOfBirth(); destroyDriver();
+		createDriver(); testSignUpWithOutAcceptingPolicy(); destroyDriver();
+		createDriver(); testSignUpWithInvalidEmailAddress(); destroyDriver();
+		createDriver(); testSignUpWithCorrectInformation(); destroyDriver();
+		createDriver(); testLogInWithCreatedAccount(); destroyDriver();
+		createDriver(); testLogInWithNotCreatedAccount(); destroyDriver();
+		createDriver(); testLogInAndRememberMe(); destroyDriver();
+		createDriver(); testLogInForgotPassword(); destroyDriver();
+		createDriver(); testLogInUsingNotCreatedAccount(); destroyDriver();
+		createDriver(); testLogInUsingCreatedAccountButWrongPassword(); destroyDriver();
+		createDriver(); testEditUserProfileWithoutFillInPassword(); destroyDriver();*/
+		createDriver(); testEditUserProfileWithPasswordFilledIn(); destroyDriver();
+	}
+	
+	/**
+	 * Test for Edit user profile module.
+	 * 		Test for editing user profile with the password filled in.
+	 * @throws InterruptedException 
+	 */
+	private void testEditUserProfileWithPasswordFilledIn() throws InterruptedException{
 		testLogInWithCreatedAccount();
-		destroyDriver();
-		createDriver();
-		testLogInWithNotCreatedAccount();
-		destroyDriver();
-		createDriver();
-		testLogInAndRememberMe();
-		destroyDriver();
-		createDriver();
-		testLogInForgotPassword();
-		destroyDriver();
-		createDriver();
-		testLogInUsingNotCreatedAccount();
-		destroyDriver();
-		createDriver();
-		testLogInUsingCreatedAccountButWrongPassword();
-		destroyDriver();
+		
+		driver.findElement(By.linkText("Profile")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("profileDropDown")).click();
+		driver.findElement(By.id("lastName")).sendKeys("NewLastName");
+		driver.findElement(By.id("password1")).sendKeys("123456");
+		driver.findElement(By.id("updateProfileBtn")).click();		
+		System.out.println("I'm done with \'Test Edit user profile with the password filled in.\'");
+		
+		Thread.sleep(50000);
+	}
+	
+	/**
+	 * Test for Edit user profile module.
+	 * 		Test for editing user profile without filling in the password.
+	 * @throws InterruptedException 
+	 */
+	private void testEditUserProfileWithoutFillInPassword() throws InterruptedException{
+		testLogInWithCreatedAccount();
+		
+		driver.findElement(By.linkText("Profile")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("profileDropDown")).click();
+		driver.findElement(By.id("lastName")).sendKeys("NewLastName");
+		driver.findElement(By.id("updateProfileBtn")).click();		
+		System.out.println("I'm done with \'Test Edit user profile without filling in the password.\'");
+		
+		Thread.sleep(50000);		
 	}
 	
 	/**
