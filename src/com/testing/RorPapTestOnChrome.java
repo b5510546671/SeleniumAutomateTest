@@ -67,6 +67,7 @@ public class RorPapTestOnChrome {
 		driver.findElement(By.linkText("Profile")).click();
 		Thread.sleep(3000);
 		driver.findElement(By.id("profileDropDown")).click();
+		driver.findElement(By.id("lastName")).clear();
 		driver.findElement(By.id("lastName")).sendKeys("NewLastName");
 		driver.findElement(By.id("password1")).sendKeys("123456");
 		driver.findElement(By.id("updateProfileBtn")).click();		
