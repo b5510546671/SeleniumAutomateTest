@@ -52,8 +52,24 @@ public class RorPapTestOnChrome {
 		createDriver(); testLogInForgotPassword(); destroyDriver();
 		createDriver(); testLogInUsingNotCreatedAccount(); destroyDriver();
 		createDriver(); testLogInUsingCreatedAccountButWrongPassword(); destroyDriver();
-		createDriver(); testEditUserProfileWithoutFillInPassword(); destroyDriver();*/
-		createDriver(); testEditUserProfileWithPasswordFilledIn(); destroyDriver();
+		createDriver(); testEditUserProfileWithoutFillInPassword(); destroyDriver();
+		createDriver(); testEditUserProfileWithPasswordFilledIn(); destroyDriver();*/
+		createDriver(); testSeeUserProfile(); destroyDriver();
+	}
+	
+	/**
+	 * Test see user profile.
+	 * @throws InterruptedException 
+	 */
+	private void testSeeUserProfile() throws InterruptedException{
+		testLogInWithCreatedAccount();
+		
+		driver.findElement(By.linkText("Profile")).click();
+		Thread.sleep(3000);
+		driver.findElement(By.id("profileDropDown")).click();
+		
+		System.out.println("I'm done with \'Test See user profile. \'");
+		Thread.sleep(10000);
 	}
 	
 	/**
