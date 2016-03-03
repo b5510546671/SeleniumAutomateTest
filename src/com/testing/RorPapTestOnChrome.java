@@ -54,9 +54,462 @@ public class RorPapTestOnChrome {
 		createDriver(); testLogInUsingCreatedAccountButWrongPassword(); destroyDriver();
 		createDriver(); testEditUserProfileWithoutFillInPassword(); destroyDriver();
 		createDriver(); testEditUserProfileWithPasswordFilledIn(); destroyDriver();
-		createDriver(); testSeeUserProfile(); destroyDriver();*/
+		createDriver(); testSeeUserProfile(); destroyDriver();
 		createDriver(); testSenderRemoveRequest(); destroyDriver();
-		//createDriver(); testCreateRequestWithCompleteInformation(); destroyDriver();
+		createDriver(); testCreateRequestWithCompleteInformation(); destroyDriver();
+		createDriver(); testCreateRequestWithNoInformation(); destroyDriver();
+		createDriver(); testCreateRequestWithOnlyStartAndDestination(); destroyDriver();
+		createDriver(); testCreateRequestWithOnlyShipmentEndDateAndTime(); destroyDriver();
+		createDriver(); testCreateRequestWithOnlyRecipientName(); destroyDriver();
+		createDriver(); testCreateRequestWithShipmentEndDateInThePast(); destroyDriver();
+		createDriver(); testCreateRequestWithoutRecipientName(); destroyDriver();*/
+		createDriver(); testCreateRequestWithoutShipmentEndDateAndTime(); destroyDriver();
+		createDriver(); testCreateRequestWithoutStartLocation(); destroyDriver();
+		createDriver(); testCreateRequestWithoutStartLocationAndDestination(); destroyDriver();
+		createDriver(); testCreateRequestWithoutDestination(); destroyDriver();
+	}
+	
+	/**
+	 * Test sender create request module.
+	 * 		Create request without destination.
+	 * @throws InterruptedException 
+	 */
+	private void testCreateRequestWithoutDestination() throws InterruptedException{
+		//testLogInWithCreatedAccount();
+		testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
+				
+		driver.findElement(By.id("myrequestNav")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("newRequest")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("fromLoc")).sendKeys("13.766730403317952,100.47589302062988");
+		driver.findElement(By.id("recipient_name")).sendKeys("Knotty");
+		driver.findElement(By.id("recipient_email")).sendKeys("Knotty@eiei.com");
+		driver.findElement(By.id("recipient_tel")).sendKeys("0812345678");
+		driver.findElement(By.id("size_length")).sendKeys("50");
+		driver.findElement(By.id("size_width")).sendKeys("50");
+		driver.findElement(By.id("size_height")).sendKeys("50");
+		driver.findElement(By.id("weight")).sendKeys("50");
+		WebElement reqEndDate = driver.findElement(By.id("reqEndDate"));
+		
+		for(int i = 0; i < 15; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		
+		for(int i = 0; i < 3; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		reqEndDate.sendKeys(Keys.ARROW_UP);
+		
+		WebElement reqEndHour = driver.findElement(By.id("endHour"));
+		
+		for(int i = 0; i < 14; i++){
+			reqEndHour.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqEndMinutes = driver.findElement(By.id("endMinutes"));
+		
+		for(int i = 0; i < 30; i++){
+			reqEndMinutes.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqPrice = driver.findElement(By.id("price"));
+		
+		for(int i = 0; i < 20; i++){
+			reqPrice.sendKeys(Keys.ARROW_RIGHT);
+		}
+		
+		driver.findElement(By.id("createRequest")).click();
+		
+		System.out.println("I'm done with \'Test Create Request Without destination.\'");
+		
+		Thread.sleep(10000);		
+	}
+	
+	/**
+	 * Test sender create request module.
+	 * 		Create request without start location.
+	 * @throws InterruptedException 
+	 */
+	private void testCreateRequestWithoutStartLocation() throws InterruptedException{
+		//testLogInWithCreatedAccount();
+		testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
+				
+		driver.findElement(By.id("myrequestNav")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("newRequest")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("toLoc")).sendKeys("13.761394982589074,100.52820682525635");
+		driver.findElement(By.id("recipient_name")).sendKeys("Knotty");
+		driver.findElement(By.id("recipient_email")).sendKeys("Knotty@eiei.com");
+		driver.findElement(By.id("recipient_tel")).sendKeys("0812345678");
+		driver.findElement(By.id("size_length")).sendKeys("50");
+		driver.findElement(By.id("size_width")).sendKeys("50");
+		driver.findElement(By.id("size_height")).sendKeys("50");
+		driver.findElement(By.id("weight")).sendKeys("50");
+		WebElement reqEndDate = driver.findElement(By.id("reqEndDate"));
+		
+		for(int i = 0; i < 15; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		
+		for(int i = 0; i < 3; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		reqEndDate.sendKeys(Keys.ARROW_UP);
+		
+		WebElement reqEndHour = driver.findElement(By.id("endHour"));
+		
+		for(int i = 0; i < 14; i++){
+			reqEndHour.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqEndMinutes = driver.findElement(By.id("endMinutes"));
+		
+		for(int i = 0; i < 30; i++){
+			reqEndMinutes.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqPrice = driver.findElement(By.id("price"));
+		
+		for(int i = 0; i < 20; i++){
+			reqPrice.sendKeys(Keys.ARROW_RIGHT);
+		}
+		
+		driver.findElement(By.id("createRequest")).click();
+		
+		System.out.println("I'm done with \'Test Create Request Without Start location.\'");
+		
+		Thread.sleep(10000);		
+	}
+	
+	/**
+	 * Test sender create request module.
+	 * 		Create request without start location and destination.
+	 * @throws InterruptedException 
+	 */
+	private void testCreateRequestWithoutStartLocationAndDestination() throws InterruptedException{
+		//testLogInWithCreatedAccount();
+		testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
+				
+		driver.findElement(By.id("myrequestNav")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("newRequest")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("recipient_name")).sendKeys("Knotty");
+		driver.findElement(By.id("recipient_email")).sendKeys("Knotty@eiei.com");
+		driver.findElement(By.id("recipient_tel")).sendKeys("0812345678");
+		driver.findElement(By.id("size_length")).sendKeys("50");
+		driver.findElement(By.id("size_width")).sendKeys("50");
+		driver.findElement(By.id("size_height")).sendKeys("50");
+		driver.findElement(By.id("weight")).sendKeys("50");
+		WebElement reqEndDate = driver.findElement(By.id("reqEndDate"));
+		
+		for(int i = 0; i < 15; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		
+		for(int i = 0; i < 3; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		reqEndDate.sendKeys(Keys.ARROW_UP);
+		
+		WebElement reqEndHour = driver.findElement(By.id("endHour"));
+		
+		for(int i = 0; i < 14; i++){
+			reqEndHour.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqEndMinutes = driver.findElement(By.id("endMinutes"));
+		
+		for(int i = 0; i < 30; i++){
+			reqEndMinutes.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqPrice = driver.findElement(By.id("price"));
+		
+		for(int i = 0; i < 20; i++){
+			reqPrice.sendKeys(Keys.ARROW_RIGHT);
+		}
+		
+		driver.findElement(By.id("createRequest")).click();
+		
+		System.out.println("I'm done with \'Test Create Request Without start location and destination.\'");
+		
+		Thread.sleep(10000);		
+	}
+	
+	/**
+	 * Test sender create request module.
+	 * 		Create request without shipment end date and time.
+	 * @throws InterruptedException 
+	 */
+	private void testCreateRequestWithoutShipmentEndDateAndTime() throws InterruptedException{
+		//testLogInWithCreatedAccount();
+		testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
+				
+		driver.findElement(By.id("myrequestNav")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("newRequest")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("fromLoc")).sendKeys("13.766730403317952,100.47589302062988");
+		driver.findElement(By.id("toLoc")).sendKeys("13.761394982589074,100.52820682525635");
+		driver.findElement(By.id("recipient_name")).sendKeys("Knotty");
+		driver.findElement(By.id("recipient_email")).sendKeys("Knotty@eiei.com");
+		driver.findElement(By.id("recipient_tel")).sendKeys("0812345678");
+		driver.findElement(By.id("size_length")).sendKeys("50");
+		driver.findElement(By.id("size_width")).sendKeys("50");
+		driver.findElement(By.id("size_height")).sendKeys("50");
+		driver.findElement(By.id("weight")).sendKeys("50");
+				
+		WebElement reqPrice = driver.findElement(By.id("price"));
+		
+		for(int i = 0; i < 20; i++){
+			reqPrice.sendKeys(Keys.ARROW_RIGHT);
+		}
+		
+		driver.findElement(By.id("createRequest")).click();
+		
+		System.out.println("I'm done with \'Test Create Request Without Shipment End Date and Time.\'");
+		
+		Thread.sleep(10000);		
+	}
+	
+	/**
+	 * Test sender create request module.
+	 * 		Create request without recipient name.
+	 * @throws InterruptedException 
+	 */
+	private void testCreateRequestWithoutRecipientName() throws InterruptedException{
+		//testLogInWithCreatedAccount();
+		testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
+		
+		driver.findElement(By.id("myrequestNav")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("newRequest")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("fromLoc")).sendKeys("13.766730403317952,100.47589302062988");
+		driver.findElement(By.id("toLoc")).sendKeys("13.761394982589074,100.52820682525635");
+		driver.findElement(By.id("size_length")).sendKeys("50");
+		driver.findElement(By.id("size_width")).sendKeys("50");
+		driver.findElement(By.id("size_height")).sendKeys("50");
+		driver.findElement(By.id("weight")).sendKeys("50");
+		WebElement reqEndDate = driver.findElement(By.id("reqEndDate"));
+		
+		for(int i = 0; i < 15; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		
+		for(int i = 0; i < 3; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		reqEndDate.sendKeys(Keys.ARROW_UP);
+		
+		WebElement reqEndHour = driver.findElement(By.id("endHour"));
+		
+		for(int i = 0; i < 14; i++){
+			reqEndHour.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqEndMinutes = driver.findElement(By.id("endMinutes"));
+		
+		for(int i = 0; i < 30; i++){
+			reqEndMinutes.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqPrice = driver.findElement(By.id("price"));
+		
+		for(int i = 0; i < 20; i++){
+			reqPrice.sendKeys(Keys.ARROW_RIGHT);
+		}
+		
+		driver.findElement(By.id("createRequest")).click();
+		
+		System.out.println("I'm done with \'Test Create Request Without Recipient's name.\'");
+		
+		Thread.sleep(10000);		
+	}
+	
+	/**
+	 * Test sender create request module.
+	 * 		Create request with shipment end date in the past.
+	 * @throws InterruptedException 
+	 */
+	private void testCreateRequestWithShipmentEndDateInThePast() throws InterruptedException{
+		//testLogInWithCreatedAccount();
+		testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
+				
+		driver.findElement(By.id("myrequestNav")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("newRequest")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("fromLoc")).sendKeys("13.766730403317952,100.47589302062988");
+		driver.findElement(By.id("toLoc")).sendKeys("13.761394982589074,100.52820682525635");
+		driver.findElement(By.id("recipient_name")).sendKeys("Knotty");
+		driver.findElement(By.id("recipient_email")).sendKeys("Knotty@eiei.com");
+		driver.findElement(By.id("recipient_tel")).sendKeys("0812345678");
+		driver.findElement(By.id("size_length")).sendKeys("50");
+		driver.findElement(By.id("size_width")).sendKeys("50");
+		driver.findElement(By.id("size_height")).sendKeys("50");
+		driver.findElement(By.id("weight")).sendKeys("50");
+		WebElement reqEndDate = driver.findElement(By.id("reqEndDate"));
+		
+		for(int i = 0; i < 15; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		
+		for(int i = 0; i < 3; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		
+		for(int i = 0; i < 7; i++){
+			reqEndDate.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqEndHour = driver.findElement(By.id("endHour"));
+		
+		for(int i = 0; i < 14; i++){
+			reqEndHour.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqEndMinutes = driver.findElement(By.id("endMinutes"));
+		
+		for(int i = 0; i < 30; i++){
+			reqEndMinutes.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqPrice = driver.findElement(By.id("price"));
+		
+		for(int i = 0; i < 20; i++){
+			reqPrice.sendKeys(Keys.ARROW_RIGHT);
+		}
+		
+		driver.findElement(By.id("createRequest")).click();
+		
+		System.out.println("I'm done with \'Test Create Request With Shipment End Date in the past.\'");
+		
+		Thread.sleep(10000);		
+	}
+	
+	/**
+	 * Test sender create request module.
+	 * 		Create request with only recipient's name.
+	 * @throws InterruptedException 
+	 */
+	private void testCreateRequestWithOnlyRecipientName() throws InterruptedException{
+		//testLogInWithCreatedAccount();
+		testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
+				
+		driver.findElement(By.id("myrequestNav")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("newRequest")).click();
+		driver.findElement(By.id("recipient_name")).sendKeys("Knotty");
+		driver.findElement(By.id("recipient_email")).sendKeys("Knotty@eiei.com");
+		driver.findElement(By.id("recipient_tel")).sendKeys("0812345678");
+		
+		driver.findElement(By.id("createRequest")).click();
+		
+		System.out.println("I'm done with \'Test Create Request With Only Recipient's name.\'");
+		
+		Thread.sleep(10000);		
+	}
+	
+	/**
+	 * Test sender create request module.
+	 * @throws InterruptedException 
+	 */
+	private void testCreateRequestWithOnlyShipmentEndDateAndTime() throws InterruptedException{
+		//testLogInWithCreatedAccount();
+		testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
+				
+		driver.findElement(By.id("myrequestNav")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("newRequest")).click();
+		
+		WebElement reqEndDate = driver.findElement(By.id("reqEndDate"));
+		
+		for(int i = 0; i < 15; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		
+		for(int i = 0; i < 3; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		reqEndDate.sendKeys(Keys.ARROW_UP);
+		
+		WebElement reqEndHour = driver.findElement(By.id("endHour"));
+		
+		for(int i = 0; i < 14; i++){
+			reqEndHour.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqEndMinutes = driver.findElement(By.id("endMinutes"));
+		
+		for(int i = 0; i < 30; i++){
+			reqEndMinutes.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		driver.findElement(By.id("createRequest")).click();
+		
+		System.out.println("I'm done with \'Test Create Request With Only Shipment End Date and Time.\'");
+		
+		Thread.sleep(10000);		
+	}
+	
+	/**
+	 * Test sender create request module.
+	 * 		Create request with only start and destination.
+	 * @throws InterruptedException 
+	 */
+	private void testCreateRequestWithOnlyStartAndDestination() throws InterruptedException{
+		//testLogInWithCreatedAccount();
+		testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
+				
+		driver.findElement(By.id("myrequestNav")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("newRequest")).click();
+		driver.findElement(By.id("fromLoc")).sendKeys("13.766730403317952,100.47589302062988");
+		driver.findElement(By.id("toLoc")).sendKeys("13.761394982589074,100.52820682525635");
+
+		driver.findElement(By.id("createRequest")).click();
+		
+		System.out.println("I'm done with \'Test Create Request With Only Start and Destination.\'");
+		
+		Thread.sleep(10000);		
+	}
+	
+	/**
+	 * Test sender create request module.
+	 * 		Create request with no information at all.
+	 * @throws InterruptedException 
+	 */
+	private void testCreateRequestWithNoInformation() throws InterruptedException{
+		//testLogInWithCreatedAccount();
+		
+		testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
+		
+		driver.findElement(By.id("myrequestNav")).click();
+		Thread.sleep(2000);
+		driver.findElement(By.id("newRequest")).click();
+		Thread.sleep(5000);
+				
+		driver.findElement(By.id("createRequest")).click();
+		
+		System.out.println("I'm done with \'Test Create Request With No Information At All.\'");
+		
+		Thread.sleep(10000);		
 	}
 	
 	/**
@@ -65,13 +518,14 @@ public class RorPapTestOnChrome {
 	 * @throws InterruptedException 
 	 */
 	private void testCreateRequestWithCompleteInformation() throws InterruptedException{
-		testLogInWithCreatedAccount();
+		//testLogInWithCreatedAccount();
+		testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
 				
 		driver.findElement(By.id("myrequestNav")).click();
+		Thread.sleep(2000);
 		driver.findElement(By.id("newRequest")).click();
-		Thread.sleep(5000);
+		Thread.sleep(2000);
 		driver.findElement(By.id("fromLoc")).sendKeys("13.766730403317952,100.47589302062988");
-		Thread.sleep(5000);
 		driver.findElement(By.id("toLoc")).sendKeys("13.761394982589074,100.52820682525635");
 		driver.findElement(By.id("recipient_name")).sendKeys("Knotty");
 		driver.findElement(By.id("recipient_email")).sendKeys("Knotty@eiei.com");
@@ -115,8 +569,7 @@ public class RorPapTestOnChrome {
 		
 		System.out.println("I'm done with \'Test Create Request With Complete Information.\'");
 		
-		Thread.sleep(10000);
-		
+		Thread.sleep(10000);		
 	}
 	
 	/**
@@ -247,7 +700,7 @@ public class RorPapTestOnChrome {
 	 */
 	private void testLogInUsingCreatedAccount(String emailAddress, String password) throws InterruptedException{
 		driver.findElement(By.linkText("Log In")).click();
-		
+		Thread.sleep(1500);
 		driver.findElement(By.id("emailAddressLogIn")).sendKeys(emailAddress);
 		driver.findElement(By.id("password")).sendKeys(password);
 		
