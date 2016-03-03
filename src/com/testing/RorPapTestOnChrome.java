@@ -53,8 +53,89 @@ public class RorPapTestOnChrome {
 		createDriver(); testLogInUsingNotCreatedAccount(); destroyDriver();
 		createDriver(); testLogInUsingCreatedAccountButWrongPassword(); destroyDriver();
 		createDriver(); testEditUserProfileWithoutFillInPassword(); destroyDriver();
-		createDriver(); testEditUserProfileWithPasswordFilledIn(); destroyDriver();*/
-		createDriver(); testSeeUserProfile(); destroyDriver();
+		createDriver(); testEditUserProfileWithPasswordFilledIn(); destroyDriver();
+		createDriver(); testSeeUserProfile(); destroyDriver();*/
+		createDriver(); testSenderRemoveRequest(); destroyDriver();
+		//createDriver(); testCreateRequestWithCompleteInformation(); destroyDriver();
+	}
+	
+	/**
+	 * Test sender create request module.
+	 * 		Create request with complete information.
+	 * @throws InterruptedException 
+	 */
+	private void testCreateRequestWithCompleteInformation() throws InterruptedException{
+		testLogInWithCreatedAccount();
+				
+		driver.findElement(By.id("myrequestNav")).click();
+		driver.findElement(By.id("newRequest")).click();
+		Thread.sleep(5000);
+		driver.findElement(By.id("fromLoc")).sendKeys("13.766730403317952,100.47589302062988");
+		Thread.sleep(5000);
+		driver.findElement(By.id("toLoc")).sendKeys("13.761394982589074,100.52820682525635");
+		driver.findElement(By.id("recipient_name")).sendKeys("Knotty");
+		driver.findElement(By.id("recipient_email")).sendKeys("Knotty@eiei.com");
+		driver.findElement(By.id("recipient_tel")).sendKeys("0812345678");
+		driver.findElement(By.id("size_length")).sendKeys("50");
+		driver.findElement(By.id("size_width")).sendKeys("50");
+		driver.findElement(By.id("size_height")).sendKeys("50");
+		driver.findElement(By.id("weight")).sendKeys("50");
+		WebElement reqEndDate = driver.findElement(By.id("reqEndDate"));
+		
+		for(int i = 0; i < 15; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		
+		for(int i = 0; i < 3; i++){
+			reqEndDate.sendKeys(Keys.ARROW_UP);
+		}		
+		reqEndDate.sendKeys(Keys.TAB);
+		reqEndDate.sendKeys(Keys.ARROW_UP);
+		
+		WebElement reqEndHour = driver.findElement(By.id("endHour"));
+		
+		for(int i = 0; i < 14; i++){
+			reqEndHour.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqEndMinutes = driver.findElement(By.id("endMinutes"));
+		
+		for(int i = 0; i < 30; i++){
+			reqEndMinutes.sendKeys(Keys.ARROW_DOWN);
+		}
+		
+		WebElement reqPrice = driver.findElement(By.id("price"));
+		
+		for(int i = 0; i < 20; i++){
+			reqPrice.sendKeys(Keys.ARROW_RIGHT);
+		}
+		
+		driver.findElement(By.id("createRequest")).click();
+		
+		System.out.println("I'm done with \'Test Create Request With Complete Information.\'");
+		
+		Thread.sleep(10000);
+		
+	}
+	
+	/**
+	 * Test sender remove request.
+	 * @throws InterruptedException 
+	 */
+	private void testSenderRemoveRequest() throws InterruptedException{
+		testCreateRequestWithCompleteInformation();
+		//testLogInUsingCreatedAccount("TesterName1@tester.com", "123456");
+		
+		driver.findElement(By.id("myrequestNav")).click();
+		
+		
+		driver.findElement(By.id("request0")).click();
+		driver.findElement(By.id("remove0")).click();
+		
+		System.out.println("I'm done with \'Test Remove Request by Sender.\'");
+		
+		Thread.sleep(10000);
 	}
 	
 	/**
@@ -161,6 +242,24 @@ public class RorPapTestOnChrome {
 	
 	/**
 	 * Test for Log in module.
+	 * 		Test for logging in using created account.
+	 * @throws InterruptedException 
+	 */
+	private void testLogInUsingCreatedAccount(String emailAddress, String password) throws InterruptedException{
+		driver.findElement(By.linkText("Log In")).click();
+		
+		driver.findElement(By.id("emailAddressLogIn")).sendKeys(emailAddress);
+		driver.findElement(By.id("password")).sendKeys(password);
+		
+		driver.findElement(By.id("logInBtn")).click();
+		
+		System.out.println("I'm done with \'Test Log In using created account.\'");
+		
+		Thread.sleep(3000);		
+	}
+	
+	/**
+	 * Test for Log in module.
 	 * 		Test for logging in with created account and select remember me.
 	 * @throws InterruptedException 
 	 */
@@ -190,7 +289,7 @@ public class RorPapTestOnChrome {
 	
 	/**
 	 * Test for Log in module.
-	 * 		Test for logging in with not created account.
+	 * 		Test for logging in with account that has not been created.
 	 * @throws InterruptedException 
 	 */
 	private void testLogInWithNotCreatedAccount() throws InterruptedException{
